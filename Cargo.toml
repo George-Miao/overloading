@@ -1,0 +1,19 @@
+[package]
+name        = "overloading"
+version     = "0.1.0"
+edition     = "2021"
+authors     = ["George Miao <gm@miao.dev>"]
+license     = "MIT"
+description = "A POC crate that utilizes `Fn*` traits to implement partial overloading"
+repository  = "https://github.com/George-Miao/overloading"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+syn         = { version = "1.0.107", features = ["full"] }
+proc-macro2 = "1.0.49"
+quote       = "1.0.23"
+tap         = "1.0.1"
+
+[lib]
+proc-macro = true
