@@ -60,7 +60,7 @@ pub fn overloading(
     } else {
         quote!( (#(#pats),*,) )
     };
-    let ty = if tys.is_empty() {
+    let arg = if tys.is_empty() {
         quote!(())
     } else {
         quote!( (#(#tys),*,) )
@@ -69,18 +69,18 @@ pub fn overloading(
     quote! {
         #struct_def
 
-        impl #generics std::ops::FnOnce<#ty> for #ident {
+        impl #generics std::ops::FnOnce<#arg> for #ident {
             type Output = #output;
 
-            extern "rust-call" fn call_once(self, #pat: #ty) -> Self::Output #block
+            extern "rust-call" fn call_once(self, #pat: #arg) -> Self::Output #block
         }
 
-        impl #generics std::ops::FnMut<#ty> for #ident {
-            extern "rust-call" fn call_mut(&mut self, #pat: #ty) -> Self::Output #block
+        impl #generics std::ops::FnMut<#arg> for #ident {
+            extern "rust-call" fn call_mut(&mut self, #pat: #arg) -> Self::Output #block
         }
 
-        impl #generics std::ops::Fn<#ty> for #ident {
-            extern "rust-call" fn call(&self, #pat: #ty) -> Self::Output #block
+        impl #generics std::ops::Fn<#arg> for #ident {
+            extern "rust-call" fn call(&self, #pat: #arg) -> Self::Output #block
         }
     }
     .into()
