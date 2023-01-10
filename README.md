@@ -12,14 +12,14 @@ A POC crate that utilizes `Fn*` traits to implement partial overloading. Caveat:
 #![feature(unboxed_closures)]
 #![feature(fn_traits)]
 
-extern crate overloading;
+use overloading::overloading;
 
-#[overloading::overloading]
+#[overloading]
 fn overloaded(abc: String) -> i32 {
     abc.parse().unwrap()
 }
 
-#[overloading::overloading(overloaded)]
+#[overloading(overloaded)]
 fn overloaded() -> i32 {
     114514
 }
