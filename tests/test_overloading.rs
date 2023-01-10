@@ -13,6 +13,11 @@ fn overloaded() -> i32 {
     114514
 }
 
+#[overloading::overloading(overloaded)]
+fn overloaded<T: Fn() -> i32>(t: T) -> i32 {
+    t()
+}
+
 #[test]
 fn test() {
     let res = overloaded("123".to_owned());
@@ -20,4 +25,7 @@ fn test() {
 
     let res = overloaded();
     assert_eq!(res, 114514);
+
+    let res = overloaded(|| 1919810);
+    assert_eq!(res, 1919810);
 }
